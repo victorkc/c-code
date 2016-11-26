@@ -8,6 +8,10 @@ int main(){
 	    rojo,
 	    azul;
 
+		//Preguntamos los tres colores primarios
+		//Comparamos los tres valores y en función de ello nos dan distintos colores.
+		//Ej. amarillo = 0, rojo = 0, azul = 1, da 001, por lo que sólo vemos el color azul.
+
 		printf("\nVes el color amarillo? (no=0, si=1)\n");
 		scanf(" %i", &amarillo);
 	
