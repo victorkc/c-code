@@ -58,6 +58,7 @@ int main(){
 		printf("Quieres volver a jugar? (no=0, si=1):");
 		scanf(" %i", &volver);
 		system("clear");
+
 	   }while (volver == 1);
 
 return EXIT_SUCCESS;
