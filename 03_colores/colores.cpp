@@ -6,12 +6,14 @@ int main(){
 
 	int amarillo,
 	    rojo,
-	    azul;
+	    azul,
+	    volver = 1;
 
 		//Preguntamos los tres colores primarios
 		//Comparamos los tres valores y en función de ello nos dan distintos colores.
 		//Ej. amarillo = 0, rojo = 0, azul = 1, da 001, por lo que sólo vemos el color azul.
-
+		//Pregunto si quiero volver a adivinar otro color.
+	do{
 		printf("\nVes el color amarillo? (no=0, si=1)\n");
 		scanf(" %i", &amarillo);
 	
@@ -53,6 +55,10 @@ int main(){
 			
 			printf("\nEstás viendo el color blanco\n\n");
 
+		printf("Quieres volver a jugar? (no=0, si=1):");
+		scanf(" %i", &volver);
+		system("clear");
+	   }while (volver == 1);
 
 return EXIT_SUCCESS;
 }
