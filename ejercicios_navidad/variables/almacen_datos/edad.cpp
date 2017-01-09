@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// Este programa te pregunta la edad, la almacena y te la muestra.
+
 int main(int argc, char *argv[]){
 	int edad;
 
