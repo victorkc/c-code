@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// Es un programa que, sin utilizar arrays, calcule la media de 10 números cualquiera dados por el usuario.
+
 int main(int argc, char *argv[]){
 
 	int suma = 0,
