@@ -2,21 +2,25 @@
 #include <stdio.h>
 
 int main(int argc, const char **argv){
-	int previo_previo = 1;
-	int previo = 1;
-       	int ahora = 0;
-       	int contador = 0;
+	int previo_previo = 1,
+	    previo = 1,
+	    ahora = 0,
+	    contador = 0;
+	char fibo[20];
 
-		printf("%i \n", previo_previo);
-		printf("%i \n", previo);
+	system("clear");
+
+	printf("%i \n", previo_previo);
+	printf("%i \n", previo);
 
 	do{
 
 		ahora = previo_previo + previo;
 		previo_previo = previo;
 		previo = ahora;
+		fibo[contador] = ahora;
+		printf("\n %i", fibo[contador]);
 		contador ++;
-		printf("%i \n", ahora);
 	}	while(contador < 20);
 
 
