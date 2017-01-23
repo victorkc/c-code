@@ -14,12 +14,14 @@ int main(int argc, char *argv[]){
 	printf("\n Cual es tu número de lista?: ");
 	scanf(" %i", &alumno);
 
-	for(fila=0; fila<10; fila++){
-		for(col=0; col<17; col++){
+	for(fila=1; fila<11; fila++){
+		for(col=1; col<18; col++){
 			numero ++;
+			if(numero == alumno)
+			printf("\n Tu posición es la fila %i y la columna %i.", fila, col);
 		}
-		if(numero == alumno)
-		printf("\n Tu posición es la fila %i y la columna %i.", fila, col);
+			if(numero == alumno)
+			printf("\n Tu posición es la fila %i y la columna %i.", fila, col);
 	}
 
 	printf("\n\n");
