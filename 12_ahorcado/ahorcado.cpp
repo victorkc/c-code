@@ -25,6 +25,7 @@ const char *palabra[] = {
 
 void inicio(){ // Se mostrará el menú inicial del juego.
 	system("clear");
+	system("toilet -fpagga \"AHORCADO\"");
 	printf("\n Bienvenido al ahorcado! Tendrás que advinar una palabra introduciendo caracteres."
 	       "\n Tendrás 5 vidas para equivocarte, si tus vidas llegan a 0, GAME OVER\n\n");
 }
