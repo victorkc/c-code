@@ -1,16 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define INC 0.001
+#define INCREMENTO 0.001
 
-double x_cuad(double x){
+double x_cuadrado(double x){
 
 	return x*x;
 }
 
 double aceleracion(double x){
 
-	return printf("\n %lf", ((x_cuad(x+INC)) - x_cuad(x))/INC);
+	return printf("\n %lf", ((x_cuadrado(x+INCREMENTO)) - x_cuadrado(x))/INCREMENTO);
 
 }
 
