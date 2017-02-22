@@ -1,22 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define DELTA 0.01
-#define MAX 10
-#define AcelX 0
-#define AcelY -10
+#define DELTA .1
 
 int main(int argc, char *argv[]){
-	double velocidad_x, velocidad_y;
+	double aceleracion = -10;
+    double velocidad = 40.;
+	double tiempo = 0.;
+	double altura = 0.;
 
 	system("clear");
+// Paso del tiempo.
 
-	printf("\n Introduce la velocidad x e y:");
-	scanf(" %lf%lf", &velocidad_x, &velocidad_y);
-
-	for(int x = 0; x<MAX; x++){
-		printf(" %lf\n", velocidad_x += AcelX*DELTA);
-		printf(" %lf\n\n", velocidad_y += AcelY*DELTA);
+	for(tiempo=0; altura>=0.; tiempo+=DELTA){
+		printf(" tiempo [%.2lfs] => velocidad [%.2lfm/s] => altura: %.2lf\n\n", tiempo, velocidad, altura);
+		velocidad += aceleracion * DELTA;
+	   	altura	  += velocidad * DELTA;
 	}
 	printf("\n\n");
 	return EXIT_SUCCESS;
