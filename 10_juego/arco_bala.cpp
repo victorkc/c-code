@@ -12,12 +12,15 @@ int main(int argc, char *argv[]){
 	double velocidad_y = 	40.;
 	double altura_y =	    0.;
 
-
-	double tiempo = 0.;
+	double tiempo = 2.;
 
 	system("clear");
 	// Paso del tiempo.
 
+	for(double x=0; x<tiempo; x+=DELTA)
+		printf(" Hola\n");
+
+	/*
 	for(tiempo=0; altura_y>=0.; tiempo+=DELTA){
 		printf(" tiempo [%.2lfs] =>" 
 				"velocidad [%.2lfm/s, %.2lfm/s] => "
@@ -30,6 +33,7 @@ int main(int argc, char *argv[]){
 		altura_x    += velocidad_x * DELTA;
 
 	}
+	*/
 	printf("\n\n");
 	return EXIT_SUCCESS;
 }
