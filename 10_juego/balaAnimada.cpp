@@ -20,7 +20,7 @@ int main(int argc, char *argv[]){
 	// En el struct de abajo hace referencia a que dentro de cada variable como por ejemplo "a", existen las variables "x" e "y". Para hacerle referencia puedo escribir por ejemplo a.x o a.y
 		
 	struct TCoordenada  a = {0., -10},
-						v = {4., 10.},
+						v = {6., 13.},
 						s = {0., 0.};
 
 	double tiempo = 0.;
