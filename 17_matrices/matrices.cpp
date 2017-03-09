@@ -7,7 +7,7 @@
 int main(int argc, char *argv[]){
 	int MX[FILA][COL] = {{1,2,3}, {4,5,6}, {7,8,9}};
 	int MY[FILA][COL] = {{1,4,7}, {2,5,8}, {3,6,9}};
-	int resultado;
+	int resultado=0;
 
 	system("clear");
 
