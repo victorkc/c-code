@@ -4,13 +4,13 @@
 #define FILA 4
 #define COL  4
 
-struct TCoordenada{
+typedef struct TCoordenada{
 	int x;
 	int y;
-};
+} Coordenada;
 
-struct TCoordenada a2s(struct TCoordenada pos){
-	struct TCoordenada s_pos;
+Coordenada a2s(Coordenada pos){
+	Coordenada s_pos;
 	s_pos.x = 2 * pos.x;
 	s_pos.y = 2 * pos.y;
 
@@ -21,7 +21,7 @@ int main(int argc, char *argv[]){
 int fila = FILA;
 int col = COL;
 
-struct TCoordenada posicion = {2,3}, buffer;
+Coordenada posicion = {2,3}, buffer;
 
 	buffer = a2s(posicion);
 
