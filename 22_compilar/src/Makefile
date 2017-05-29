@@ -20,4 +20,4 @@ clean:
 		$(RM) *.o
 
 dist: clean
-		mv $(TARGET) $(DDIR)
+	mv $(TARGET) $(DDIR)
