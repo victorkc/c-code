@@ -8,8 +8,8 @@
 #define MAXY 203
 
 struct TCoordenadas{
-	int x;
-	int y;
+	double x;
+	double y;
 };
 
 struct TNave{
@@ -23,8 +23,8 @@ struct TPoder{
 };
 int crearNave(struct TNave naveEnemiga[MAX]){ //Asigna coor aleatorias a las naves en x e y.
 	for(int i=0; i<MAX; i++){
-		naveEnemiga[i].coor.x = rand() %MAXX;
-		naveEnemiga[i].coor.y = rand() %MAXY;
+		naveEnemiga[i].coor.x = 30;//rand() %MAXX;
+		naveEnemiga[i].coor.y = 30;//rand() %MAXY;
 		//printf("\n coor x: %i, coor y: %i", naveEnemiga[i].coor.x, naveEnemiga[i].coor.y); // Imprime las 100 naves.
 	}
 }
@@ -49,13 +49,13 @@ void terminarPantalla(){
 
 void perseguirJugador(struct TNave naveEnemiga[MAX], struct TNave *naveJugador){
 	if(naveEnemiga[0].coor.x > naveJugador->coor.x)
-		naveEnemiga[0].coor.x--;
+		naveEnemiga[0].coor.x-=0.3;
 	if(naveEnemiga[0].coor.y > naveJugador->coor.y)
-		naveEnemiga[0].coor.y--;
-	if(naveEnemiga[0].coor.x > naveJugador->coor.x)
-		naveEnemiga[0].coor.x++;
-	if(naveEnemiga[0].coor.y > naveJugador->coor.y)
-		naveEnemiga[0].coor.y++;
+		naveEnemiga[0].coor.y-=0.3;
+	if(naveEnemiga[0].coor.x < naveJugador->coor.x)
+		naveEnemiga[0].coor.x+=0.3;
+	if(naveEnemiga[0].coor.y < naveJugador->coor.y)
+		naveEnemiga[0].coor.y+=0.3;
 
 }
 
