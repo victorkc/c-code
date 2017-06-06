@@ -12,7 +12,7 @@ int main(int argc, char *argv[]){
 	//time_t tiempo = 
 	double tiempo = difftime(t1, t0);
 
-	printf("\n tiempo: %.lf", tiempo);
+	printf("\n tiempo: %.lf", tiempo+7);
 
 	printf("\n\n");
 	return EXIT_SUCCESS;
