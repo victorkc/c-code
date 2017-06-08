@@ -4,7 +4,7 @@
 #include <ncurses.h>
 #include <math.h>
 
-#define MAX 100
+#define MAX 300
 #define MAXX 54
 #define MAXY 203
 #define VELOCIDAD 0.2 
@@ -163,17 +163,26 @@ void vaciar_pila(struct Pila *pila){
 	}
 
 bool
-jugar_otra_vez(bool *again, bool *fin, bool *fin2, bool *fin1, struct Pila *pila){
+jugar_otra_vez(bool *again, bool *fin, bool *fin2, bool *fin1, struct Pila *pila, time_t *tiempo_inicio){
 	char letra = getch();
 
 	if(letra == 'y'){
 		vaciar_pila(pila);
+		*tiempo_inicio = time(0);
 		return *again = false, *fin = false, *fin2 = false, *fin1 = true;
 	}
 
 	if(letra == 'n')
 		return *again = true, *fin1 = true;
 
+}
+
+void cuento_puntos(int *puntos, time_t tiempo_inicio){
+	time_t tiempo_pasado = time(0);
+
+	*puntos = difftime(tiempo_pasado, tiempo_inicio);
+	tiempo_inicio = time(0);
+	mvprintw(1,0,"Puntos: %i", *puntos);
 }
 	
 
@@ -183,7 +192,9 @@ main (int argc, char *argv[])
 	srand (time (NULL));
 	int maxy;
 	int maxx;
-	long int tempo = 0;
+
+	int puntos;
+	time_t tiempo_inicio = time(0);
 
 	bool fin = false;
 	bool jugar = false;
@@ -206,26 +217,27 @@ main (int argc, char *argv[])
 	do
 	{
 		/*Texto introducción al juego + instrucciones de las teclas*/
-		mvprintw(20,60, "Bienvenido! Este es el juego The last one, donde vas a manejar una nave.");
-		mvprintw(21,60, "Tu objetivo es  sobrevivir el  máximo de  tiempo que  puedas  acumulando ");
-		mvprintw(22,60, "puntos de tiempo o destruyendo tantos enemigos como puedas.");
-		mvprintw(24,60, "Los  controles  para mover la nave son: w-arriba, s-abajo, a-izquierda y");
-		mvprintw(25,60, "d-derecha, si quieres salir del juego, pulsa la letra 'p'");
-		mvprintw(26,60, "Mucha suerte!!");
-		mvprintw(28,60, "Pulsa enter para empezar o la letra 'p' para salir del juego...");
+		mvprintw(20,65, "Bienvenido! Este es el juego The last one, donde vas a manejar una nave.");
+		mvprintw(21,65, "Tu objetivo es  sobrevivir el  máximo de  tiempo que  puedas  acumulando ");
+		mvprintw(22,65, "puntos de tiempo o destruyendo tantos enemigos como puedas.");
+		mvprintw(24,65, "Los  controles  para mover la nave son: w-arriba, s-abajo, a-izquierda y");
+		mvprintw(25,65, "d-derecha, si quieres salir del juego, pulsa la letra 'p'");
+		mvprintw(26,65, "Mucha suerte!!");
+		mvprintw(28,65, "Pulsa enter para empezar o la letra 'p' para salir del juego...");
 
 		refresh ();		// Actualiza la pantalla para ver el caracter.
 		salir_juego(&fin2, &jugar, &again, &fin1);
 
 	}
 	while(jugar == false);
+	tiempo_inicio = time(0);
 	do
 	{	
-		fin1 = false; // para que al volver a jugar no casque a la segunda vuelta.
 
 		do
 		{
 
+			cuento_puntos(&puntos, tiempo_inicio);
 			crearNave (&pila);
 			/* Movimiento de los actores */
 			for (int i = 0; i < pila.cima; i++)
@@ -254,12 +266,14 @@ main (int argc, char *argv[])
 		erase();
 
 		do{
-				mvprintw(20,60, "Volver a jugar? Y=si, N=no");
-				jugar_otra_vez(&again, &fin, &fin2, &fin1, &pila);
-				//mvprintw(26,60, "Again: %s", again ? true : false);
-				//mvprintw(27,60, "Fin: %s", fin ? true : false);
+				mvprintw(25,70, "Oh... Te han matado, has conseguido %i puntos.", puntos);
+				mvprintw(26,70, "Quieres volver a intentarlo? Y=si, N=no");
+				jugar_otra_vez(&again, &fin, &fin2, &fin1, &pila, &tiempo_inicio);
+				//mvprintw(26,65, "Again: %s", again ? true : false);
+				//mvprintw(27,65, "Fin: %s", fin ? true : false);
 				refresh();
 		}while(fin1 == false);
+		fin1 = false; // para que al volver a jugar no casque a la segunda vuelta.
 	}
 	while(again == false);
 
