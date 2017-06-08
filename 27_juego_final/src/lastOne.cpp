@@ -139,27 +139,43 @@ muerteJugador (struct Pila *pila, struct Nave *naveJugador)
 	return false;
 }
 bool
-salir_juego(bool *acabar, bool *jugar, bool *again){
+salir_juego(bool *fin2, bool *jugar, bool *again, bool *fin1){
 	char tecla;
 	tecla = getch();
 
 	if(tecla == 'p'){
-		return *jugar = true, *acabar = true, *again = true;
+		return *jugar = true, *fin2 = true, *again = true, *fin1 = true;
 	}
 	if(tecla == 10) // '10' significa la tecla enter, no funciona correctamente ni con \r ni \n como comentan
 		return *jugar = true;
 
 }
 
+void vaciar_pila(struct Pila *pila){
+
+		for(;pila->cima > 0;pila->cima--){
+
+		pila->naveEnemiga[pila->cima].coor.x = -15;
+		pila->naveEnemiga[pila->cima].coor.y = -15;
+		pila->naveEnemiga[pila->cima].perseguir = 0;
+		}
+	return;
+	}
+
 bool
-jugar_otra_vez(bool *again, bool *fin){
+jugar_otra_vez(bool *again, bool *fin, bool *fin2, bool *fin1, struct Pila *pila){
 	char letra = getch();
-	if(letra == 'y')
-		return *again = false, *fin = false;
+
+	if(letra == 'y'){
+		vaciar_pila(pila);
+		return *again = false, *fin = false, *fin2 = false, *fin1 = true;
+	}
+
 	if(letra == 'n')
-		return *again = true;
+		return *again = true, *fin1 = true;
 
 }
+	
 
 	int
 main (int argc, char *argv[])
@@ -168,9 +184,11 @@ main (int argc, char *argv[])
 	int maxy;
 	int maxx;
 	long int tempo = 0;
+
 	bool fin = false;
 	bool jugar = false;
-	bool acabar = false;
+	bool fin2 = false;
+	bool fin1 = false;
 	bool again = false;
 
 	struct Nave naveJugador;
@@ -185,7 +203,6 @@ main (int argc, char *argv[])
 
 	//poder.dibujoPoder = 'X';
 
-
 	do
 	{
 		/*Texto introducción al juego + instrucciones de las teclas*/
@@ -198,12 +215,14 @@ main (int argc, char *argv[])
 		mvprintw(28,60, "Pulsa enter para empezar o la letra 'p' para salir del juego...");
 
 		refresh ();		// Actualiza la pantalla para ver el caracter.
-		salir_juego(&acabar, &jugar, &again);
+		salir_juego(&fin2, &jugar, &again, &fin1);
 
 	}
 	while(jugar == false);
 	do
 	{	
+		fin1 = false; // para que al volver a jugar no casque a la segunda vuelta.
+
 		do
 		{
 
@@ -231,16 +250,16 @@ main (int argc, char *argv[])
 			refresh ();		// Actualiza la pantalla para ver el caracter.
 
 		}
-		while (fin == false  && acabar == false);
+		while (fin == false  && fin2 == false);
 		erase();
 
-		if(again == false){
-			mvprintw(20,60, "Volver a jugar? Y=si, N=no");
-			jugar_otra_vez(&again, &fin);
-			//mvprintw(26,60, "Again: %s", again ? true : false);
-			//mvprintw(27,60, "Fin: %s", fin ? true : false);
-			//refresh();
-		}
+		do{
+				mvprintw(20,60, "Volver a jugar? Y=si, N=no");
+				jugar_otra_vez(&again, &fin, &fin2, &fin1, &pila);
+				//mvprintw(26,60, "Again: %s", again ? true : false);
+				//mvprintw(27,60, "Fin: %s", fin ? true : false);
+				refresh();
+		}while(fin1 == false);
 	}
 	while(again == false);
 

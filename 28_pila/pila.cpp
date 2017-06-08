@@ -7,6 +7,7 @@
 struct Nave{
 	int x;
 	int y;
+	char dibujo;
 };
 
 struct Pila{
@@ -21,6 +22,13 @@ void push(struct Pila *pila, struct Nave *dato){
 
 }
 
+void
+crear_nave(struct *Nave nave){
+	struct Nave nave;
+	char dibujo nave;
+
+}
+
 void pop{
 
 }
@@ -28,6 +36,10 @@ void pop{
 int main(int argc, char *argv[]){
 
 	system ("clear");
+	struct Pila pila;
+
+	crear_nave()
+
 
 	printf("\n\n");
 	return EXIT_SUCCESS;
