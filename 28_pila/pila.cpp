@@ -23,22 +23,22 @@ void push(struct Pila *pila, struct Nave *dato){
 }
 
 void
-crear_nave(struct *Nave nave){
-	struct Nave nave;
-	char dibujo nave;
+crear_nave(struct Pila *pila){
+	for(int i = 0; i<MAX; i++){
+	pila->naveEnemiga[i]->x = 5;
+	pila->naveEnemiga[i]->y = 5;
+	pila->naveEnemiga[i]->dibujo = 'K';
+	}
 
 }
 
-void pop{
-
-}
 
 int main(int argc, char *argv[]){
 
 	system ("clear");
 	struct Pila pila;
 
-	crear_nave()
+	crear_nave(&pila);
 
 
 	printf("\n\n");
