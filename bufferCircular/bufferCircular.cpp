@@ -24,7 +24,7 @@ bool pop(struct TQueue *b)
 
 void print(struct TQueue *b)
 {
-	for(int i=0; i<b->summit; i++)
+	for(int i=b->head; i<b->summit; i++)
 		printf("%c", b->buffer[i]);
 	printf("\n");
 }
@@ -42,6 +42,7 @@ int main(int argc, char *argv[]){
 	for(int i=0; i<5; i++)
 		push(b, c+i);
 
+	for(int i=0; i<3; i++)
 	pop(b);
 	print(b);
 
