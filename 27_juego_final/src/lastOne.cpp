@@ -25,7 +25,10 @@ main (int argc, char *argv[])
 	struct Nave naveJugador;
 	//struct Poder poder;
 	struct Pila pila;
+	struct Pila pilaPoder;
+
 	pila.cima = 0;
+	pilaPoder.cima = 0;
 
 	iniciarPantalla (&maxx, &maxy);
 	naveJugador.dibujoNave = 'H';
@@ -36,6 +39,7 @@ main (int argc, char *argv[])
 
 	do
 	{
+		bordesJuego();
 		/*Texto introducción al juego + instrucciones de las teclas*/
 		mvprintw(20,65, "Bienvenido! Este es el juego The last one, donde vas a manejar una nave.");
 		mvprintw(21,65, "Tu objetivo es  sobrevivir el  máximo de  tiempo que  puedas  acumulando ");
@@ -57,8 +61,10 @@ main (int argc, char *argv[])
 		do
 		{
 
+			bordesJuego();
 			cuento_puntos(&puntos, tiempo_inicio);
-			crearNave (&pila);
+			//crearNave (&pila);
+			crearPoder (&pilaPoder);
 			/* Movimiento de los actores */
 			for (int i = 0; i < pila.cima; i++)
 				(pila.naveEnemiga[i].perseguir (&pila.naveEnemiga[i], naveJugador));
@@ -74,23 +80,32 @@ main (int argc, char *argv[])
 												va a ir el jugador (anticipan el futuro) y eso
 												no es justo para el jugador */
 
-			/* Pintado */
+						/* Pintado */
 			erase();
-			mostrarPila (pila);
+			//explosion();
+			mostrarPila (pila, pilaPoder);
 			mostrarNave (naveJugador);
+			activarPoder (&pilaPoder, &naveJugador); /* Función que checkea que el jugador está
+													   encima de alguno de los poderes, si es 
+													   así, en las coordernadas del poder se 
+													   ejecuta el poder.*/
+
+
+			//mvprintw(6,7, "Ha pasado la línea de llamada a la función activarPoder.");
+
 			//mvprintw(6,6, "y: %.2lf, x: %.2lf", naveJugador.coor.y, naveJugador.coor.x);
-			refresh ();		// Actualiza la pantalla para ver el caracter.
+			//mvprintw(7,6, "y: %.2lf, x: %.2lf", pilaPoder.poder[0].coor.y, pilaPoder.poder[0].coor.x);
+			//refresh ();		// Actualiza la pantalla para ver el caracter.
 
 		}
 		while (fin == false  && fin2 == false);
 		erase();
 
 		do{
-			mvprintw(25,70, "Oh... Te han matado, has conseguido %i puntos.", puntos);
-			mvprintw(26,70, "Quieres volver a intentarlo? Y=si, N=no");
+			bordesJuego();
+			mvprintw(25,75, "Oh... has perdido, conseguiste %i puntos.", puntos);
+			mvprintw(26,75, "Quieres volver a intentarlo? y=si, n=no");
 			jugar_otra_vez(&again, &fin, &fin2, &fin1, &pila, &tiempo_inicio, &naveJugador);
-			//mvprintw(26,65, "Again: %s", again ? true : false);
-			//mvprintw(27,65, "Fin: %s", fin ? true : false);
 			refresh();
 		}while(fin1 == false);
 		fin1 = false; // para que al volver a jugar no casque a la segunda vuelta.
