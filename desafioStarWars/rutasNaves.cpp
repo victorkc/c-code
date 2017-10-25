@@ -1,16 +1,21 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "funciones.h"
+#include "funciones.cpp"
 
 int
 main(int argc, char *argv[]){
 
 	char POrigen, PDestino;
-	intro();
-	seleccionPlanetas(&POrigen, &PDestino);
-	resolucion(&POrigen, &PDestino);
+	bool volver=true;
+	do{
+		intro();
+		seleccionPlanetas(&POrigen, &PDestino);
+		resolucion(&POrigen, &PDestino);
+		reiniciar(&volver);
 
-	return EXIT_SUCCESS;
+	}while(volver==true);
 
-}
+			return EXIT_SUCCESS;
+
+	}
